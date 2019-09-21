@@ -33,7 +33,7 @@
             <Row class="marginTop">
                 <Col span="6">
                     <div style="padding-bottom: 1px; overflow: hidden;">
-                        <Button type="error" @click="deleteOrganization" v-if="viewAccessAll">删除</Button>
+                        <Button type="error" @click="deleteServer" v-if="viewAccessAll">删除</Button>
                     </div>
                 </Col>
                 <Col span="18" v-show="showPage">
@@ -86,13 +86,13 @@
                         align: 'center'
                     },
                     {
-                        title: '服务点标识',
-                        key: 'fwddm',
+                        title: '机构标识',
+                        key: 'jgdm',
                         width: 100,
                         render: (h, params) => {
                             if ((new Date().getTime() - new Date(params.row.created_at).getTime()) <= 300000) {
                                 return h('span', [
-                                    params.row.fwddm,
+                                    params.row.jgdm,
                                     h('tag', {
                                         style: {
                                             marginLeft: '10px',
@@ -106,7 +106,7 @@
                                 ])
                             } else {
                                 return h('span', [
-                                    params.row.fwddm
+                                    params.row.jgdm
                                 ])
                             }
                         }
@@ -207,7 +207,7 @@
             // 删除权限限制
             viewAccessAll() {
                 this.changeAccess = getLocalStorage('access').split(',')
-                const item = ['Delete:/admin/organization']
+                const item = ['Delete:/admin/server']
                 const arr = ['*']
                 if (this.changeAccess.toString() === arr.toString()) {
                     return true
@@ -221,7 +221,7 @@
             // 添加权限限制
             addAccess() {
                 const addAccess = getLocalStorage('access').split(',')
-                const item = ['Post:/admin/organization']
+                const item = ['Post:/admin/server']
                 const arr = ['*']
                 if (addAccess.toString() === arr.toString()) {
                     return true
@@ -232,13 +232,13 @@
 
         },
         created() {
-            this.setserverList()
+            this.setServerList()
             this.editAccess()
         },
         methods: {
             editAccess() {
                 const addAccess = getLocalStorage('access').split(',')
-                const item = ['Put:/admin/organization/{id:[0-9]+}']
+                const item = ['Put:/admin/server/{id:[0-9]+}']
                 const arr = ['*']
                 if (addAccess.toString() === arr.toString()) {
                     return true
@@ -247,7 +247,7 @@
                     return hasOneOf(item, addAccess)
                 }
             },
-            setserverList() {
+            setServerList() {
                 var _this = this
                 const params = {
                     keyword: _this.keyword,
@@ -279,7 +279,7 @@
                 }
                 this.selectArr = arr
             },
-            deleteOrganization() {
+            deleteServer() {
                 var _this = this
 
                 const list = _this.$refs.server.getSelection()
@@ -341,17 +341,17 @@
             changePage(value) {
                 this.loading = true
                 this.page = value
-                this.setserverList()
+                this.setServerList()
             },
             changePageSize(value) {
                 this.loading = true
                 this.pageSize = value
-                this.setserverList()
+                this.setServerList()
             },
             query() {
                 this.loading = true
                 this.page = 1
-                this.setserverList()
+                this.setServerList()
             },
             resetQuery() {
                 this.loading = true
@@ -359,7 +359,7 @@
                 this.keyword = ''
                 this.fdate = ''
                 this.fwdlx = ''
-                this.setserverList()
+                this.setServerList()
             }
         }
     }
