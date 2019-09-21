@@ -5,10 +5,10 @@
 <template>
     <div class="login">
         <div class="login-con">
-            <Card icon="md-pulse" title="STD研究所管理后台" :bordered="false">
+            <Card icon="md-pulse" title="信息管理系统后台" :bordered="false">
                 <div class="form-con">
                     <login-form @on-success-valid="handleSubmit" :load="loading"></login-form>
-                    <p class="login-tip">【STD研究所】 -- 后台</p>
+                    <p class="login-tip">【信息管理系统】 -- 后台</p>
                 </div>
             </Card>
         </div>

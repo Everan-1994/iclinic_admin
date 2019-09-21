@@ -65,6 +65,195 @@ export default [
         ]
     },
     {
+        path: '/resource',
+        name: 'resource',
+        meta: {
+            icon: 'logo-buffer',
+            title: '医疗资源数据',
+            notCache: true,
+            access: getAccess([
+                '*',
+                'Get:/admin/resource',
+                'Get:/admin/resource/{id:[0-9]+}',
+                'Put:/admin/resource/{id:[0-9]+}',
+                'Post:/admin/resource',
+                'Delete:/admin/resource'
+            ]),
+        },
+        component: Main,
+        children: [
+            {
+                path: 'add-edit/:id',
+                name: 'add_edit_organization',
+                meta: {
+                    icon: 'md-flower',
+                    title: route => `${route.params.id >= 0 ? '编辑机构信息' : '添加机构信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/organization/{id:[0-9]+}","Put:/admin/organization/{id:[0-9]+}","Post:/admin/organization"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/resources/add-edit-organization.vue')
+            },
+            {
+                path: 'organization-list',
+                name: 'organization_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/organization","Delete:/admin/organization"]),
+                    // access: Access,
+                    icon: 'md-albums',
+                    title: '机构组织',
+                    notCache: true,
+                },
+                component: () => import('@/view/resources/organization-list'),
+            },
+            {
+                path: 'add-edit-server/:id',
+                name: 'add_edit_server',
+                meta: {
+                    icon: 'md-flower',
+                    title: route => `${route.params.id >= 0 ? '编辑服务点信息' : '添加服务点信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/server/{id:[0-9]+}","Put:/admin/server/{id:[0-9]+}","Post:/admin/server"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/resources/add-edit-server.vue')
+            },
+            {
+                path: 'server-list',
+                name: 'server_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/server","Delete:/admin/server"]),
+                    // access: Access,
+                    icon: 'md-albums',
+                    title: '服务点',
+                    notCache: true,
+                },
+                component: () => import('@/view/resources/server-list'),
+            },
+            {
+                path: 'add-edit-odi/:id',
+                name: 'add_edit_odi',
+                meta: {
+                    icon: 'md-flower',
+                    title: route => `${route.params.id >= 0 ? '编辑机构业务开展信息' : '添加机构业务开展信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/odi/{id:[0-9]+}","Put:/admin/odi/{id:[0-9]+}","Post:/admin/odi"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/resources/add-edit-odi.vue')
+            },
+            {
+                path: 'odi-list',
+                name: 'odi_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/odi","Delete:/admin/odi"]),
+                    // access: Access,
+                    icon: 'md-albums',
+                    title: '机构业务开展情况',
+                    notCache: true,
+                },
+                component: () => import('@/view/resources/odi-list'),
+            },
+            {
+                path: 'add-edit-department/:id',
+                name: 'add_edit_department',
+                meta: {
+                    icon: 'md-flower',
+                    title: route => `${route.params.id >= 0 ? '编辑科室信息' : '添加科室信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/department/{id:[0-9]+}","Put:/admin/department/{id:[0-9]+}","Post:/admin/department"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/resources/add-edit-department.vue')
+            },
+            {
+                path: 'department-list',
+                name: 'department_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/department","Delete:/admin/department"]),
+                    // access: Access,
+                    icon: 'md-albums',
+                    title: '科室',
+                    notCache: true,
+                },
+                component: () => import('@/view/resources/department-list'),
+            },
+            {
+                path: 'add-edit-human-resource/:id',
+                name: 'add_edit_human_resource',
+                meta: {
+                    icon: 'md-flower',
+                    title: route => `${route.params.id >= 0 ? '编辑人力资源信息' : '添加人力资源信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/hr/{id:[0-9]+}","Put:/admin/hr/{id:[0-9]+}","Post:/admin/hr"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/resources/add-edit-human-resource.vue')
+            },
+            {
+                path: 'human-resource-list',
+                name: 'human_resource_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/hr","Delete:/admin/hr"]),
+                    // access: Access,
+                    icon: 'md-albums',
+                    title: '人力资源信息',
+                    notCache: true,
+                },
+                component: () => import('@/view/resources/human-resource-list'),
+            },
+        ]
+    },
+    {
+        path: '/person',
+        name: 'person',
+        meta: {
+            icon: 'ios-contacts',
+            title: '个人信息管理',
+            notCache: true,
+            access: getAccess(['*',
+                'Get:/admin/person',
+                'Get:/admin/person/{id:[0-9]+}',
+                'Put:/admin/person/{id:[0-9]+}',
+                'Post:/admin/person',
+                'Delete:/admin/person'
+            ]),
+        },
+        component: Main,
+        children: [
+            {
+                path: 'add-edit/:id',
+                name: 'add_edit_person',
+                meta: {
+                    icon: 'md-contact',
+                    title: route => `${route.params.id >= 0 ? '编辑个人信息' : '添加个人信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/person/{id:[0-9]+}","Put:/admin/person/{id:[0-9]+}","Post:/admin/person"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/person/add-edit-person.vue')
+            },
+            {
+                path: 'list',
+                name: 'person_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/person","Delete:/admin/person"]),
+                    // access: Access,
+                    icon: 'md-person',
+                    title: '个人信息管理',
+                    notCache: true,
+                },
+                component: () => import('@/view/person/person-list.vue'),
+            }
+        ]
+    },
+    {
         path: '/member',
         name: 'member',
         meta: {
@@ -156,69 +345,6 @@ export default [
                 },
                 component: () => import('@/view/member/role-add-edit')
             },
-        ]
-    },
-    {
-        path: '/block',
-        name: 'block',
-        meta: {
-            icon: 'logo-buffer',
-            title: '区块管理',
-            notCache: true,
-            access: getAccess(['*', 'Get:/admin/block', 'Get:/admin/block/{id:[0-9]+}', 'Put:/admin/block/{id:[0-9]+}', 'Post:/admin/block', 'Delete:/admin/block', 'Get:/admin/block/{id:[0-9]+}/item', 'Get:/admin/block/item/{id:[0-9]+}', 'Post:/admin/block/item', 'Put:/admin/block/item/{id:[0-9]+}', 'Delete:/admin/block/item', 'Patch:/admin/block/item/sort']),
-        },
-        component: Main,
-        children: [
-            {
-                path: 'add-edit/:id',
-                name: 'add_block',
-                meta: {
-                    icon: 'md-flower',
-                    title: route => `${route.params.id >= 0 ? '编辑区块' : '添加区块'}`,
-                    notCache: true,
-                    hideInMenu: true,
-                    access: getAccess(["*","Get:/admin/block/{id:[0-9]+}","Put:/admin/block/{id:[0-9]+}","Post:/admin/block"]),
-                    beforeCloseName: 'before_close_normal'
-                },
-                component: () => import('@/view/block/add-block.vue')
-            },
-            {
-                path: 'list',
-                name: 'block_list',
-                meta: {
-                    access: getAccess(["*","Get:/admin/block","Delete:/admin/block"]),
-                    // access: Access,
-                    icon: 'md-albums',
-                    title: '区块列表',
-                    notCache: true,
-                },
-                component: () => import('@/view/block/block-list'),
-            },
-            {
-                path: 'list/:id',
-                name: 'block_detail_list',
-                meta: {
-                    icon: 'md-flower',
-                    title: route => `区块内容管理`,
-                    notCache: true,
-                    hideInMenu: true,
-                    access: getAccess(["*","Get:/admin/block/{blockId:[0-9]+}/item","Delete:/admin/block/item","Patch:/admin/block/item/sort"])
-                },
-                component: () => import('@/view/block/block-detail-list.vue')
-            },
-            {
-                path: 'list/:id/add-edit/:itemId',
-                name: 'block_detail',
-                meta: {
-                    icon: 'md-flower',
-                    title: route => `${route.query.itemId  ? '编辑区块内容' : '添加区块内容'}`,
-                    notCache: true,
-                    hideInMenu: true,
-                    access: getAccess(["*","Get:/admin/block/item/{id:[0-9]+}","Post:/admin/block/item","Put:/admin/block/item/{id:[0-9]+}"]),
-                    beforeCloseName: 'before_close_normal'
-                },
-                component: () => import('@/view/block/block-detail.vue')
-            }
         ]
     },
     {
