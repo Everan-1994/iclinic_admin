@@ -210,6 +210,50 @@ export default [
         ]
     },
     {
+        path: '/device',
+        name: 'device',
+        meta: {
+            icon: 'ios-cube',
+            title: '设备资源管理',
+            notCache: true,
+            access: getAccess(['*',
+                'Get:/admin/device',
+                'Get:/admin/device/{id:[0-9]+}',
+                'Put:/admin/device/{id:[0-9]+}',
+                'Post:/admin/device',
+                'Delete:/admin/device'
+            ]),
+        },
+        component: Main,
+        children: [
+            {
+                path: 'add-edit-device/:id',
+                name: 'add_edit_device',
+                meta: {
+                    icon: 'md-contact',
+                    title: route => `${route.params.id >= 0 ? '编辑设备信息' : '添加设备信息'}`,
+                    notCache: true,
+                    hideInMenu: true,
+                    access: getAccess(["*","Get:/admin/device/{id:[0-9]+}","Put:/admin/device/{id:[0-9]+}","Post:/admin/device"]),
+                    beforeCloseName: 'before_close_normal'
+                },
+                component: () => import('@/view/device/add-edit-device.vue')
+            },
+            {
+                path: 'list',
+                name: 'device_list',
+                meta: {
+                    access: getAccess(["*","Get:/admin/device","Delete:/admin/device"]),
+                    // access: Access,
+                    icon: 'ios-cube',
+                    title: '设备资源管理',
+                    notCache: true,
+                },
+                component: () => import('@/view/device/device-list.vue'),
+            }
+        ]
+    },
+    {
         path: '/person',
         name: 'person',
         meta: {
