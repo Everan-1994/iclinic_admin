@@ -169,7 +169,7 @@
                         {required: true, message: '请填写设备名称', trigger: 'blur'}
                     ],
                     tpsbts: [
-                        {required: true, type: 'number', message: '请填写设备台数', trigger: 'blur'}
+                        {required: true, message: '请填写设备台数', trigger: 'blur'}
                     ],
                     sbdh: [
                         {required: true, message: '请填写设备代号', trigger: 'blur'}
