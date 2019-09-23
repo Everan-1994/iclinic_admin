@@ -250,7 +250,7 @@
                         {required: true, message: '请填写许可证号码', trigger: 'blur'}
                     ],
                     kbzjjes: [
-                        {required: true, type: 'number', message: '请填写开办资金金额数', trigger: 'blur'}
+                        {required: true, message: '请填写开办资金金额数', trigger: 'blur'}
                     ],
                     jgszdmzzzdfbz: [
                         {required: true, message: '请选择民族自治地方标志', trigger: 'change'}

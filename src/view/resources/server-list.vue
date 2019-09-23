@@ -88,7 +88,6 @@
                     {
                         title: '机构标识',
                         key: 'jgdm',
-                        width: 100,
                         render: (h, params) => {
                             if ((new Date().getTime() - new Date(params.row.created_at).getTime()) <= 300000) {
                                 return h('span', [
@@ -115,7 +114,6 @@
                         title: '服务点名称',
                         key: 'fwdmc',
                         align: 'center',
-                        width: 100,
                         render: (h, params) => {
                             return h('span', [
                                 params.row.fwdmc
@@ -126,7 +124,6 @@
                         title: '服务点类型',
                         key: 'fwdlx',
                         align: 'center',
-                        width: 100,
                         render: (h, params) => {
                             return h('span', [
                                 params.row.fwdlx
