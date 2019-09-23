@@ -124,7 +124,6 @@
                         title: '服务点类型',
                         key: 'fwdlx',
                         align: 'center',
-                        width: 100,
                         render: (h, params) => {
                             return h('span', [
                                 params.row.fwdlx
