@@ -319,7 +319,7 @@ export default [
         component: () => import('@/view/services/add-edit-diagnose.vue')
       },
       {
-        path: 'list',
+        path: 'diagnose-list',
         name: 'diagnose_list',
         meta: {
           access: getAccess(['*', 'Get:/admin/diagnose', 'Delete:/admin/diagnose']),
@@ -344,7 +344,7 @@ export default [
         component: () => import('@/view/services/add-edit-order.vue')
       },
       {
-        path: 'list',
+        path: 'order-list',
         name: 'order_list',
         meta: {
           access: getAccess(['*', 'Get:/admin/order', 'Delete:/admin/order']),
@@ -369,7 +369,7 @@ export default [
         component: () => import('@/view/services/add-edit-record.vue')
       },
       {
-        path: 'list',
+        path: 'record-list',
         name: 'record_list',
         meta: {
           access: getAccess(['*', 'Get:/admin/record', 'Delete:/admin/record']),
@@ -394,7 +394,7 @@ export default [
         component: () => import('@/view/services/add-edit-referral.vue')
       },
       {
-        path: 'list',
+        path: 'referral-list',
         name: 'referral_list',
         meta: {
           access: getAccess(['*', 'Get:/admin/referral', 'Delete:/admin/referral']),

@@ -12,7 +12,7 @@
     <Card>
       <Row class="marginTop">
         <Col span="4">
-          <Button type="primary" @click="addDepartment" v-if="addAccess" to="/resource/add-edit-department/-1">添加科室信息
+          <Button type="primary" @click="addReferral" v-if="addAccess" to="/service/add-edit-referral/-1">添加转诊记录
           </Button>
         </Col>
         <Col span="20" style="margin-bottom: 15px;">
@@ -26,12 +26,12 @@
                     </span>
         </Col>
       </Row>
-      <Table ref="department" :columns="columns" :data="list" :loading="loading"
+      <Table ref="referral" :columns="columns" :data="list" :loading="loading"
              @on-selection-change="selctChange"></Table>
       <Row class="marginTop">
         <Col span="6">
           <div style="padding-bottom: 1px; overflow: hidden;">
-            <Button type="error" @click="delDepartment" v-if="viewAccessAll">删除</Button>
+            <Button type="error" @click="delReferral" v-if="viewAccessAll">删除</Button>
           </div>
         </Col>
         <Col span="18" v-show="showPage">
@@ -57,11 +57,11 @@
 </template>
 <script type="text/ecmascript-6">
   import {hasOneOf} from '@/libs/tools'
-  import {departmentList, delDepartment} from '@/api/department'
+  import {referralList, delReferral} from '@/api/referral'
   import {getLocalStorage} from '@/libs/util'
 
   export default {
-    name: 'department_list',
+    name: 'referral_list',
     data () {
       return {
         total: 0,
@@ -108,8 +108,8 @@
             }
           },
           {
-            title: '科室编码',
-            key: 'ksbm',
+            title: '服务网点代码',
+            key: 'fwwddm',
             align: 'center',
             render: (h, params) => {
               return h('span', [
@@ -118,22 +118,22 @@
             }
           },
           {
-            title: '科室名称',
-            key: 'ksmc',
+            title: '转诊记录ID',
+            key: 'zzjlid',
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.ksmc
+                params.row.zzjlid
               ])
             }
           },
           {
-            title: '标准科室代码',
-            key: 'bzksdm',
+            title: '卡号',
+            key: 'kh',
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.bzksdm
+                params.row.kh
               ])
             }
           },
@@ -173,7 +173,7 @@
                 h('Button', {
                   props: {
                     icon: 'ios-create-outline',
-                    to: '/resource/add-edit-department/' + params.row.id,
+                    to: '/service/add-edit-referral/' + params.row.id,
                     type: 'primary',
                     size: 'small'
                   },
@@ -183,7 +183,7 @@
                   },
                   on: {
                     click: () => {
-                      this.editDepartment(params.row.id)
+                      this.editReferral(params.row.id)
                     }
                   }
                 }, '编辑')
@@ -201,7 +201,7 @@
       // 删除权限限制
       viewAccessAll () {
         this.changeAccess = getLocalStorage('access').split(',')
-        const item = ['Delete:/admin/department']
+        const item = ['Delete:/admin/referral']
         const arr = ['*']
         if (this.changeAccess.toString() === arr.toString()) {
           return true
@@ -215,7 +215,7 @@
       // 添加权限限制
       addAccess () {
         const addAccess = getLocalStorage('access').split(',')
-        const item = ['Post:/admin/department']
+        const item = ['Post:/admin/referral']
         const arr = ['*']
         if (addAccess.toString() === arr.toString()) {
           return true
@@ -226,13 +226,13 @@
 
     },
     created () {
-      this.setDepartmentList()
+      this.setReferralList()
       this.editAccess()
     },
     methods: {
       editAccess () {
         const addAccess = getLocalStorage('access').split(',')
-        const item = ['Put:/admin/department/{id:[0-9]+}']
+        const item = ['Put:/admin/referral/{id:[0-9]+}']
         const arr = ['*']
         if (addAccess.toString() === arr.toString()) {
           return true
@@ -241,7 +241,7 @@
           return hasOneOf(item, addAccess)
         }
       },
-      setDepartmentList () {
+      setReferralList () {
         var _this = this
         const params = {
           keyword: _this.keyword,
@@ -252,7 +252,7 @@
           endTime: _this.fdate && _this.fdate[1] ? Date.parse(_this.fdate[1]) / 1000 : 0
         }
 
-        departmentList(params).then(function (res) {
+        referralList(params).then(function (res) {
           if (res.data.errorCode === 0) {
             const data = res.data.data
             _this.list = data.data
@@ -273,13 +273,13 @@
         }
         this.selectArr = arr
       },
-      delDepartment () {
+      delReferral () {
         var _this = this
 
-        const list = _this.$refs.department.getSelection()
+        const list = _this.$refs.referral.getSelection()
 
         if (list.length === 0) {
-          this.$Message.error('请勾选要删除的科室信息')
+          this.$Message.error('请勾选要删除的转诊记录')
           return false
         }
 
@@ -289,7 +289,7 @@
           onOk: () => {
             const ids = {}
             ids.ids = _this.selectArr
-            delDepartment(ids).then(function (res) {
+            delReferral(ids).then(function (res) {
               if (res.data.errorCode === 0) {
                 let arr = _this.list.filter(item => !_this.selectArr.some(ele => ele === item.id))
                 _this.list = arr
@@ -307,19 +307,19 @@
 
         })
       },
-      editDepartment (id) {
+      editReferral (id) {
         const route = {
           name: 'add_edit_odi',
           params: {
             id
           },
           meta: {
-            title: `${id >= 0 ? '编辑科室信息' : '添加科室信息'}`
+            title: `${id >= 0 ? '编辑转诊记录' : '添加转诊记录'}`
           }
         }
         this.$router.push(route)
       },
-      addDepartment () {
+      addReferral () {
         let id = -1
         const route = {
           name: 'add_edit_odi',
@@ -327,7 +327,7 @@
             id
           },
           meta: {
-            title: `${id >= 0 ? '编辑科室信息' : '添加科室信息'}`
+            title: `${id >= 0 ? '编辑转诊记录' : '添加转诊记录'}`
           }
         }
         this.$router.push(route)
@@ -335,24 +335,24 @@
       changePage (value) {
         this.loading = true
         this.page = value
-        this.setDepartmentList()
+        this.setReferralList()
       },
       changePageSize (value) {
         this.loading = true
         this.pageSize = value
-        this.setDepartmentList()
+        this.setReferralList()
       },
       query () {
         this.loading = true
         this.page = 1
-        this.setDepartmentList()
+        this.setReferralList()
       },
       resetQuery () {
         this.loading = true
         this.page = 1
         this.keyword = ''
         this.fdate = ''
-        this.setDepartmentList()
+        this.setReferralList()
       }
     }
   }
