@@ -163,40 +163,40 @@
             {required: true, message: '请填写机构标识', trigger: 'blur'}
           ],
           jzc: [
-            {required: true, type: 'number', message: '请填写净资产', trigger: 'blur'}
+            {required: true, message: '请填写净资产', trigger: 'blur'}
           ],
           fz: [
-            {required: true, type: 'number',  message: '请填写负债', trigger: 'blur'}
+            {required: true, message: '请填写负债', trigger: 'blur'}
           ],
           wxzcjkbf: [
-            {required: true, type: 'number', message: '请填写无形资产及开办费', trigger: 'blur'}
+            {required: true, message: '请填写无形资产及开办费', trigger: 'blur'}
           ],
           gdzc: [
-            {required: true, type: 'number', message: '请填写固定资产', trigger: 'blur'}
+            {required: true, message: '请填写固定资产', trigger: 'blur'}
           ],
           dwtz: [
-            {required: true, type: 'number', message: '请填写对外投资', trigger: 'blur'}
+            {required: true, message: '请填写对外投资', trigger: 'blur'}
           ],
           ldzc: [
-            {required: true, type: 'number', message: '请填写流动资产', trigger: 'blur'}
+            {required: true, message: '请填写流动资产', trigger: 'blur'}
           ],
           zzc: [
-            {required: true, type: 'number', message: '请填写总支出', trigger: 'blur'}
+            {required: true, message: '请填写总支出', trigger: 'blur'}
           ],
           zzch: [
-            {required: true, type: 'number', message: '请填写总资产', trigger: 'blur'}
+            {required: true, message: '请填写总资产', trigger: 'blur'}
           ],
           zsr: [
-            {required: true, type: 'number', message: '请填写总收入', trigger: 'blur'}
+            {required: true, message: '请填写总收入', trigger: 'blur'}
           ],
           ywyfmj: [
-            {required: true, type: 'number', message: '请填写业务用房面积', trigger: 'blur'}
+            {required: true, message: '请填写业务用房面积', trigger: 'blur'}
           ],
           khfwryzs: [
-            {required: true, type: 'number', message: '请填写客户服务人员总数', trigger: 'blur'}
+            {required: true, message: '请填写客户服务人员总数', trigger: 'blur'}
           ],
           zgzs: [
-            {required: true, type: 'number', message: '请填写职工总数', trigger: 'blur'}
+            {required: true, message: '请填写职工总数', trigger: 'blur'}
           ],
           bspt: [
             {required: true, message: '请选择部署平台', trigger: 'change'}

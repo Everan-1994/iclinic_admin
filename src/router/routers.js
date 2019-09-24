@@ -260,7 +260,7 @@ export default [
         component: () => import('@/view/device/add-edit-device.vue')
       },
       {
-        path: 'list',
+        path: 'device-list',
         name: 'device_list',
         meta: {
           access: getAccess(['*', 'Get:/admin/device', 'Delete:/admin/device']),

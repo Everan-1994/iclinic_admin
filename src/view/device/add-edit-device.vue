@@ -132,7 +132,7 @@
                 </Row>
                 <FormItem style="margin-top: 5%;">
                     <Button type="success" @click="sumbitDevice('formValidate')">保存</Button>
-                    <Button type="text" to="/device/device-list">返回科室列表</Button>
+                    <Button type="text" to="/device/device-list">返回设备列表</Button>
                 </FormItem>
             </Form>
         </Card>
@@ -169,7 +169,7 @@
                         {required: true, message: '请填写设备名称', trigger: 'blur'}
                     ],
                     tpsbts: [
-                        {required: true, type: 'number', message: '请填写设备台数', trigger: 'blur'}
+                        {required: true, message: '请填写设备台数', trigger: 'blur'}
                     ],
                     sbdh: [
                         {required: true, message: '请填写设备代号', trigger: 'blur'}
@@ -187,7 +187,7 @@
             }
         },
         created() {
-            this.device_title = this.$route.params.id >= 0 ? '编辑科室信息' : '添加科室信息'
+            this.device_title = this.$route.params.id >= 0 ? '编辑设备信息' : '添加设备信息'
             this.setDevice()
         },
         methods: {

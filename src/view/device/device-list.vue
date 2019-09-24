@@ -128,12 +128,12 @@
             }
           },
           {
-            title: '设备型号',
-            key: 'sbxh',
+            title: '设备台数',
+            key: 'tpsbts',
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.sbxh
+                params.row.tpsbts
               ])
             }
           },
