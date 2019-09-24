@@ -113,7 +113,7 @@
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.ksbm
+                params.row.fwwddm
               ])
             }
           },

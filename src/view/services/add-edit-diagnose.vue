@@ -163,7 +163,7 @@
                 </Row>
                 <FormItem style="margin-top: 5%;">
                     <Button type="success" @click="sumbitDiagnose('formValidate')">保存</Button>
-                    <Button type="text" to="/services/diagnose-list">返回医学诊断列表</Button>
+                    <Button type="text" to="/service/diagnose-list">返回医学诊断列表</Button>
                 </FormItem>
             </Form>
         </Card>

@@ -18,8 +18,7 @@
                         <FormItem label="卡类型/卡号" prop="kh">
                             <Input v-model="formValidate.kh">
                             <Select v-model="formValidate.klx" slot="prepend" style="width: 100px">
-                                <Option value="1">卡类型1</Option>
-                                <Option value="2">卡类型2</Option>
+                                <Option v-for="lx in klx" :key="index" :value="lx.value">{{ lx.name }}</Option>
                             </Select>
                             </Input>
                         </FormItem>
@@ -27,11 +26,10 @@
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem label="证件类型/证件号">
+                        <FormItem label="证件类型/证件号" prop="zjhm">
                             <Input v-model="formValidate.zjhm">
                             <Select v-model="formValidate.zjlbdm" slot="prepend" style="width: 100px">
-                                <Option value="1">证件类型1</Option>
-                                <Option value="2">证件类型2</Option>
+                                <Option v-for="idc in idcard" :key="index" :value="idc.code">{{ idc.name }}</Option>
                             </Select>
                             </Input>
                         </FormItem>
@@ -44,8 +42,7 @@
                     <Col span="6">
                         <FormItem label="性别" prop="xbdm">
                             <Select v-model="formValidate.xbdm" clearable>
-                                <Option value="1">性别1</Option>
-                                <Option value="2">性别2</Option>
+                                <Option v-for="sex in gender" :key="index" :value="sex.code">{{ sex.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -54,16 +51,16 @@
                     <Col span="6">
                         <FormItem label="患者属性">
                             <Select v-model="formValidate.hzsx" clearable>
-                                <Option value="1">属性1</Option>
-                                <Option value="2">属性2</Option>
+                                <Option value="00">自费</Option>
+                                <Option value="21">广州医保</Option>
+                                <Option value="99">其他</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="6">
                         <FormItem label="婚姻状况">
                             <Select v-model="formValidate.hyztdm" clearable>
-                                <Option value="1">状态1</Option>
-                                <Option value="2">状态2</Option>
+                                <Option v-for="m in marriage" :key="index" :value="m.code">{{ m.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -75,8 +72,7 @@
                     <Col span="6">
                         <FormItem label="民族">
                             <Select v-model="formValidate.mzdm" clearable>
-                                <Option value="1">民族1</Option>
-                                <Option value="2">民族2</Option>
+                                <Option v-for="n in nation" :key="index" :value="n.code">{{ n.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -85,38 +81,36 @@
                     <Col span="8">
                         <FormItem label="国籍">
                             <Select v-model="formValidate.gjdm" clearable>
-                                <Option value="1">国籍1</Option>
-                                <Option value="2">国籍2</Option>
+                                <Option v-for="c in country" :key="index" :value="c.code">{{ c.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="8">
-                        <FormItem label="档案号">
+                        <FormItem label="档案号" prop="jgnbdah">
                             <Input v-model="formValidate.jgnbdah" placeholder="机构内部档案号"></Input>
                         </FormItem>
                     </Col>
                     <Col span="8">
                         <FormItem label="文化程度">
                             <Select v-model="formValidate.whcddm" clearable>
-                                <Option value="1">程度1</Option>
-                                <Option value="2">程度2</Option>
+                                <Option v-for="e in education" :key="index" :value="e.code">{{ e.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="8">
-                        <FormItem label="固定电话">
+                        <FormItem label="固定电话" prop="gddhhm">
                             <Input v-model="formValidate.gddhhm" placeholder="固定电话"></Input>
                         </FormItem>
                     </Col>
                     <Col span="8">
-                        <FormItem label="手机号码">
+                        <FormItem label="手机号码" prop="sjhm">
                             <Input v-model="formValidate.sjhm" placeholder="手机号码"></Input>
                         </FormItem>
                     </Col>
                     <Col span="8">
-                        <FormItem label="电子邮箱">
+                        <FormItem label="电子邮箱" prop="dzyj">
                             <Input v-model="formValidate.dzyj" placeholder="电子邮箱"></Input>
                         </FormItem>
                     </Col>
@@ -125,70 +119,67 @@
                     <Col span="8">
                         <FormItem label="职业类别">
                             <Select v-model="formValidate.zylbdm" clearable>
-                                <Option value="1">职业1</Option>
-                                <Option value="2">职业2</Option>
+                                <Option v-for="c in career" :key="index" :value="c.code">{{ c.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="8">
-                        <FormItem label="出生地划码">
+                        <FormItem label="出生地划码" prop="csdxzqhm">
                             <Input v-model="formValidate.csdxzqhm" placeholder="出生地行政区划码"></Input>
                         </FormItem>
                     </Col>
                     <Col span="8">
-                        <FormItem label="居住地划码">
+                        <FormItem label="居住地划码" prop="jzdxzqhm">
                             <Input v-model="formValidate.jzdxzqhm" placeholder="居住地行政区划码"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <FormItem label="出生地址">
+                        <FormItem label="出生地址" prop="csd">
                             <Input v-model="formValidate.csd" placeholder="出生地址"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="居住地址">
+                        <FormItem label="居住地址" prop="jzdz">
                             <Input v-model="formValidate.jzdz" placeholder="居住地址"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="8">
-                        <FormItem label="户口地划码">
+                        <FormItem label="户口地划码" prop="hkdxzqhm">
                             <Input v-model="formValidate.hkdxzqhm" placeholder="户口地行政区划码"></Input>
                         </FormItem>
                     </Col>
                     <Col span="16">
-                        <FormItem label="户口地址">
+                        <FormItem label="户口地址" prop="hkdz">
                             <Input v-model="formValidate.hkdz" placeholder="户口地址"></Input>
                         </FormItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="6">
-                        <FormItem label="联系人姓名">
+                        <FormItem label="联系人姓名" prop="lxrxm">
                             <Input v-model="formValidate.lxrxm" placeholder="联系人姓名"></Input>
                         </FormItem>
                     </Col>
                     <Col span="6">
-                        <FormItem label="联系人电话">
+                        <FormItem label="联系人电话" prop="lxrdh">
                             <Input v-model="formValidate.lxrdh" placeholder="联系人电话"></Input>
                         </FormItem>
                     </Col>
                     <Col span="6">
                         <FormItem label="ABO血型">
                             <Select v-model="formValidate.abo" clearable>
-                                <Option value="1">血型1</Option>
-                                <Option value="2">血型2</Option>
+                                <Option v-for="a in abo" :key="index" :value="a.code">{{ a.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="6">
                         <FormItem label="RH血型">
                             <Select v-model="formValidate.rh" clearable>
-                                <Option value="1">血型1</Option>
-                                <Option value="2">血型2</Option>
+                                <Option v-for="r in rh" :key="index" :value="r.code">{{ r.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -197,13 +188,12 @@
                     <Col span="8">
                         <FormItem label="参保类型">
                             <Select v-model="formValidate.cblbdm" clearable>
-                                <Option value="1">参保1</Option>
-                                <Option value="2">参保2</Option>
+                                <Option v-for="i in insurance" :key="index" :value="i.code">{{ i.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="8">
-                        <FormItem label="个人档案ID">
+                        <FormItem label="个人档案ID" prop="grdaid">
                             <Input v-model="formValidate.grdaid" placeholder="个人档案ID"></Input>
                         </FormItem>
                     </Col>
@@ -256,6 +246,7 @@
 <script type="text/ecmascript-6">
 
     import {addPerson, editPerson, personDetail} from '@/api/person'
+    import { _select } from '@/api/select'
 
     export default {
         name: 'add_edit_person',
@@ -273,13 +264,58 @@
                 },
                 ruleValidate: {
                     jgdm: [
-                        {required: true, message: '请填写机构标识', trigger: 'blur'}
+                        {required: true, message: '请填写机构标识', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     kh: [
-                        {required: true, message: '请填写卡号', trigger: 'blur'}
+                        {required: true, message: '请填写卡号', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+                    ],
+                    grdaid: [
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+                    ],
+                    gddhhm: [
+                        {max: 20, message: '长度不能超过20个字符', trigger: 'blur'}
+                    ],
+                    jzdz: [
+                        {max: 200, message: '长度不能超过200个字符', trigger: 'blur'}
+                    ],
+                    lxrdh: [
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+                    ],
+                    lxrxm: [
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+                    ],
+                    hkdz: [
+                        {max: 200, message: '长度不能超过200个字符', trigger: 'blur'}
+                    ],
+                    csd: [
+                        {max: 200, message: '长度不能超过200个字符', trigger: 'blur'}
+                    ],
+                    hkdxzqhm: [
+                        {max: 15, message: '长度不能超过15个字符', trigger: 'blur'}
+                    ],
+                    jzdxzqhm: [
+                        {max: 15, message: '长度不能超过15个字符', trigger: 'blur'}
+                    ],
+                    csdxzqhm: [
+                        {max: 15, message: '长度不能超过15个字符', trigger: 'blur'}
+                    ],
+                    sjhm: [
+                        {max: 20, message: '长度不能超过20个字符', trigger: 'blur'}
+                    ],
+                    dzyj: [
+                        {max: 70, message: '长度不能超过70个字符', trigger: 'blur'}
+                    ],
+                    jgnbdah: [
+                        {max: 32, message: '长度不能超过32个字符', trigger: 'blur'}
+                    ],
+                    zjhm: [
+                        {max: 20, message: '长度不能超过20个字符', trigger: 'blur'}
                     ],
                     xm: [
-                        {required: true, message: '请填写姓名', trigger: 'blur'}
+                        {required: true, message: '请填写姓名', trigger: 'blur'},
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
                     ],
                     xbdm: [
                         {required: true, message: '请选择性别', trigger: 'change'}
@@ -293,14 +329,80 @@
                     cxbz: [
                         {required: true, message: '请选择撤销标志', trigger: 'change'}
                     ],
-                }
+                },
+                klx: [
+                    {
+                        value: 0,
+                        name: '健康卡'
+                    },
+                    {
+                        value: 1,
+                        name: '社保卡'
+                    },
+                    {
+                        value: 2,
+                        name: '市民卡'
+                    },
+                    {
+                        value: 3,
+                        name: '医院系统内部号'
+                    },
+                    {
+                        value: 4,
+                        name: '计划免疫卡'
+                    },
+                    {
+                        value: 5,
+                        name: '国家居民健康卡'
+                    },
+                    {
+                        value: 6,
+                        name: '居民健康档案编号'
+                    },
+                    {
+                        value: 9,
+                        name: '其他'
+                    }
+                ], // 卡类型
+                idcard: [], // 身份证类型
+                gender: [], // 性别代码
+                marriage: [], // 婚姻状况
+                nation: [], // 名族代码
+                country: [], // 国籍代码
+                education: [], // 文化程度
+                career: [], // 职业类别
+                abo: [], // abo 血型
+                rh: [], // rh 血型
+                insurance: [], // 参保类型
             }
         },
         created() {
             this.person_title = this.$route.params.id >= 0 ? '编辑个人信息' : '添加个人信息'
             this.setPersonDetail()
+            this.getSelectList('idcard')
+            this.getSelectList('gender')
+            this.getSelectList('marriage')
+            this.getSelectList('nation')
+            this.getSelectList('country')
+            this.getSelectList('education')
+            this.getSelectList('career')
+            this.getSelectList('abo')
+            this.getSelectList('rh')
+            this.getSelectList('insurance')
         },
         methods: {
+            getSelectList(name) {
+                let _this = this
+                _select(name).then(function (res) {
+                    if (res.data.errorCode === 0) {
+                        _this[`${name}`] = res.data.data
+                    } else {
+                        console.log('获取下拉菜单：' + name + '失败！')
+                    }
+                }).catch(function(err) {
+                    console.log('获取下拉菜单：' + name + '失败！')
+                })
+            },
             setPersonDetail() {
                 let id = this.$route.params.id
                 var that = this
@@ -342,7 +444,37 @@
                     grdaid: data.grdaid, tbrqsj: data.tbrqsj, sjscsj: data.sjscsj, mj: data.mj, cxbz: data.cxbz,
                     yl1: '', yl2: ''
                 };
-                data2.xbmc = '男'
+
+                this.gender.forEach((val) => {
+                    if (data.xbdm == val.code) {
+                        data2.xbmc = val.name // 性别名称赋值
+                    }
+                })
+
+                this.nation.forEach((val) => {
+                    if (data.mzdm == val.code) {
+                        data2.mzmc = val.name // 民族名称赋值
+                    }
+                })
+
+                this.country.forEach((val) => {
+                    if (data.gjdm == val.code) {
+                        data2.gjmc = val.name // 民族名称赋值
+                    }
+                })
+
+                this.education.forEach((val) => {
+                    if (data.whcddm == val.code) {
+                        data2.whcdmc = val.name // 文化程度名称赋值
+                    }
+                })
+
+                this.career.forEach((val) => {
+                    if (data.zylbdm == val.code) {
+                        data2.zylbmc = val.name // 职业类别名称赋值
+                    }
+                })
+
                 data2.sjscsj = data.sjscsj ?
                     Date.parse(data.sjscsj) / 1000 : ''
                 data2.csrq = Date.parse(data.csrq) / 1000

@@ -277,7 +277,7 @@ export default [
         path: '/service',
         name: 'service',
         meta: {
-            icon: 'ios-cube',
+            icon: 'md-bookmarks',
             title: '医疗服务管理',
             notCache: true,
             access: getAccess(['*',
@@ -324,7 +324,7 @@ export default [
                 meta: {
                     access: getAccess(['*', 'Get:/admin/diagnose', 'Delete:/admin/diagnose']),
                     // access: Access,
-                    icon: 'ios-cube',
+                    icon: 'md-done-all',
                     title: '医疗诊断',
                     notCache: true,
                 },
@@ -349,7 +349,7 @@ export default [
                 meta: {
                     access: getAccess(['*', 'Get:/admin/order', 'Delete:/admin/order']),
                     // access: Access,
-                    icon: 'ios-cube',
+                    icon: 'ios-create',
                     title: '门诊处方',
                     notCache: true,
                 },
@@ -374,7 +374,7 @@ export default [
                 meta: {
                     access: getAccess(['*', 'Get:/admin/record', 'Delete:/admin/record']),
                     // access: Access,
-                    icon: 'ios-cube',
+                    icon: 'md-copy',
                     title: '门诊病历',
                     notCache: true,
                 },
@@ -399,7 +399,7 @@ export default [
                 meta: {
                     access: getAccess(['*', 'Get:/admin/referral', 'Delete:/admin/referral']),
                     // access: Access,
-                    icon: 'ios-cube',
+                    icon: 'md-document',
                     title: '转诊记录',
                     notCache: true,
                 },
