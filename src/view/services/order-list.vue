@@ -12,26 +12,26 @@
     <Card>
       <Row class="marginTop">
         <Col span="4">
-          <Button type="primary" @click="addDepartment" v-if="addAccess" to="/resource/add-edit-department/-1">添加科室信息
+          <Button type="primary" @click="addOrder" v-if="addAccess" to="/service/add-edit-order/-1">添加门诊处方
           </Button>
         </Col>
         <Col span="20" style="margin-bottom: 15px;">
                     <span style="">
                         <Input v-model="keyword" placeholder="请输入关键字" class="mleft" style="width: 200px"/>
                         <DatePicker type="datetimerange" placement="bottom-end" v-model="fdate"
-                                    placeholder="选择添加科室的时间范围"
+                                    placeholder="选择添加门诊处方的时间范围"
                                     style="width: 280px" class="mleft"></DatePicker>
                         <Button type="info" icon="ios-search" class="mleft" @click="query">查询</Button>
                         <Button type="default" icon="md-refresh" class="mleft" @click="resetQuery">重置查询</Button>
                     </span>
         </Col>
       </Row>
-      <Table ref="department" :columns="columns" :data="list" :loading="loading"
+      <Table ref="order" :columns="columns" :data="list" :loading="loading"
              @on-selection-change="selctChange"></Table>
       <Row class="marginTop">
         <Col span="6">
           <div style="padding-bottom: 1px; overflow: hidden;">
-            <Button type="error" @click="delDepartment" v-if="viewAccessAll">删除</Button>
+            <Button type="error" @click="delOrder" v-if="viewAccessAll">删除</Button>
           </div>
         </Col>
         <Col span="18" v-show="showPage">
@@ -57,11 +57,11 @@
 </template>
 <script type="text/ecmascript-6">
   import {hasOneOf} from '@/libs/tools'
-  import {departmentList, delDepartment} from '@/api/department'
+  import {orderList, delOrder} from '@/api/order'
   import {getLocalStorage} from '@/libs/util'
 
   export default {
-    name: 'department_list',
+    name: 'order_list',
     data () {
       return {
         total: 0,
@@ -108,32 +108,32 @@
             }
           },
           {
-            title: '科室编码',
-            key: 'ksbm',
+            title: '服务网点代码',
+            key: 'fwwddm',
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.ksbm
+                params.row.fwwddm
               ])
             }
           },
           {
-            title: '科室名称',
-            key: 'ksmc',
+            title: '卡号',
+            key: 'kh',
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.ksmc
+                params.row.kh
               ])
             }
           },
           {
-            title: '标准科室代码',
-            key: 'bzksdm',
+            title: '处方明细ID',
+            key: 'cfmxid',
             align: 'center',
             render: (h, params) => {
               return h('span', [
-                params.row.bzksdm
+                params.row.cfmxid
               ])
             }
           },
@@ -173,7 +173,7 @@
                 h('Button', {
                   props: {
                     icon: 'ios-create-outline',
-                    to: '/resource/add-edit-department/' + params.row.id,
+                    to: '/service/add-edit-order/' + params.row.id,
                     type: 'primary',
                     size: 'small'
                   },
@@ -183,7 +183,7 @@
                   },
                   on: {
                     click: () => {
-                      this.editDepartment(params.row.id)
+                      this.editOrder(params.row.id)
                     }
                   }
                 }, '编辑')
@@ -201,7 +201,7 @@
       // 删除权限限制
       viewAccessAll () {
         this.changeAccess = getLocalStorage('access').split(',')
-        const item = ['Delete:/admin/department']
+        const item = ['Delete:/admin/order']
         const arr = ['*']
         if (this.changeAccess.toString() === arr.toString()) {
           return true
@@ -215,7 +215,7 @@
       // 添加权限限制
       addAccess () {
         const addAccess = getLocalStorage('access').split(',')
-        const item = ['Post:/admin/department']
+        const item = ['Post:/admin/order']
         const arr = ['*']
         if (addAccess.toString() === arr.toString()) {
           return true
@@ -226,13 +226,13 @@
 
     },
     created () {
-      this.setDepartmentList()
+      this.setOrderList()
       this.editAccess()
     },
     methods: {
       editAccess () {
         const addAccess = getLocalStorage('access').split(',')
-        const item = ['Put:/admin/department/{id:[0-9]+}']
+        const item = ['Put:/admin/order/{id:[0-9]+}']
         const arr = ['*']
         if (addAccess.toString() === arr.toString()) {
           return true
@@ -241,7 +241,7 @@
           return hasOneOf(item, addAccess)
         }
       },
-      setDepartmentList () {
+      setOrderList () {
         var _this = this
         const params = {
           keyword: _this.keyword,
@@ -252,7 +252,7 @@
           endTime: _this.fdate && _this.fdate[1] ? Date.parse(_this.fdate[1]) / 1000 : 0
         }
 
-        departmentList(params).then(function (res) {
+        orderList(params).then(function (res) {
           if (res.data.errorCode === 0) {
             const data = res.data.data
             _this.list = data.data
@@ -273,13 +273,13 @@
         }
         this.selectArr = arr
       },
-      delDepartment () {
+      delOrder () {
         var _this = this
 
-        const list = _this.$refs.department.getSelection()
+        const list = _this.$refs.order.getSelection()
 
         if (list.length === 0) {
-          this.$Message.error('请勾选要删除的科室信息')
+          this.$Message.error('请勾选要删除的门诊处方')
           return false
         }
 
@@ -289,7 +289,7 @@
           onOk: () => {
             const ids = {}
             ids.ids = _this.selectArr
-            delDepartment(ids).then(function (res) {
+            delOrder(ids).then(function (res) {
               if (res.data.errorCode === 0) {
                 let arr = _this.list.filter(item => !_this.selectArr.some(ele => ele === item.id))
                 _this.list = arr
@@ -307,27 +307,27 @@
 
         })
       },
-      editDepartment (id) {
+      editOrder (id) {
         const route = {
           name: 'add_edit_odi',
           params: {
             id
           },
           meta: {
-            title: `${id >= 0 ? '编辑科室信息' : '添加科室信息'}`
+            title: `${id >= 0 ? '编辑门诊处方' : '添加门诊处方'}`
           }
         }
         this.$router.push(route)
       },
-      addDepartment () {
+      addOrder () {
         let id = -1
         const route = {
-          name: 'add_edit_odi',
+          name: 'add_edit_order',
           params: {
             id
           },
           meta: {
-            title: `${id >= 0 ? '编辑科室信息' : '添加科室信息'}`
+            title: `${id >= 0 ? '编辑门诊处方' : '添加门诊处方'}`
           }
         }
         this.$router.push(route)
@@ -335,24 +335,24 @@
       changePage (value) {
         this.loading = true
         this.page = value
-        this.setDepartmentList()
+        this.setOrderList()
       },
       changePageSize (value) {
         this.loading = true
         this.pageSize = value
-        this.setDepartmentList()
+        this.setOrderList()
       },
       query () {
         this.loading = true
         this.page = 1
-        this.setDepartmentList()
+        this.setOrderList()
       },
       resetQuery () {
         this.loading = true
         this.page = 1
         this.keyword = ''
         this.fdate = ''
-        this.setDepartmentList()
+        this.setOrderList()
       }
     }
   }

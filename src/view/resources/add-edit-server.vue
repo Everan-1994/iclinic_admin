@@ -294,7 +294,7 @@
             {required: true, message: '请填写单位隶属关系代码', trigger: 'blur'}
           ],
           sjscsj: [
-            {required: true, type: 'date', message: '请选择请数据生成时间', trigger: 'change'}
+            {required: true, type: 'date', message: '请选择数据生成时间', trigger: 'change'}
           ],
           tbrqsj: [
             {required: true, type: 'date', message: '请选择填报日期', trigger: 'change'}
