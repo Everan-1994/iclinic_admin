@@ -34,8 +34,12 @@
                     <Col span="8">
                         <FormItem label="服务点类型" prop="fwdlx">
                             <Select v-model="formValidate.fwdlx" clearable>
-                                <Option value="1">类型1</Option>
-                                <Option value="2">类型2</Option>
+                                <Option value="01">互联网医院诊疗</Option>
+                                <Option value="02">健康管理服务</Option>
+                                <Option value="03">药事服务机构</Option>
+                                <Option value="04">药房</Option>
+                                <Option value="05">社区中心</Option>
+                                <Option value="06">其他</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -55,8 +59,9 @@
                     <Col span="6">
                         <FormItem label="分类管理类别代码" prop="fwdflgllbdm">
                             <Select v-model="formValidate.fwdflgllbdm" clearable>
-                                <Option value="1">类别1</Option>
-                                <Option value="2">类别2</Option>
+                                <Option value="1">非盈利性医疗机构</Option>
+                                <Option value="2">盈利性医疗机构</Option>
+                                <Option value="9">其他</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -87,16 +92,21 @@
                     <Col span="8">
                         <FormItem label="服务点医院级别" prop="fwdyyjb">
                             <Select v-model="formValidate.fwdyyjb" clearable>
-                                <Option value="1">级别1</Option>
-                                <Option value="2">级别2</Option>
+                                <Option value="0">基层卫生服务站</Option>
+                                <Option value="1">一级医院</Option>
+                                <Option value="2">二级医院</Option>
+                                <Option value="3">三级医院</Option>
+                                <Option value="4">未定级</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="8">
                         <FormItem label="服务点医院等级" prop="fwdyydj">
                             <Select v-model="formValidate.fwdyydj" clearable>
-                                <Option value="1">等级1</Option>
-                                <Option value="2">等级2</Option>
+                                <Option value="0">甲等</Option>
+                                <Option value="1">乙等</Option>
+                                <Option value="2">丙等</Option>
+                                <Option value="3">未定等</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -154,24 +164,28 @@
                         </FormItem>
                     </Col>
                     <Col span="6">
-                        <FormItem label="服务点第二名称">
-                            <Input v-model="formValidate.jgdemc" placeholder="服务点第二名称"></Input>
+                        <FormItem label="服务点第二名称" prop="fwddemc">
+                            <Input v-model="formValidate.fwddemc" placeholder="服务点第二名称"></Input>
                         </FormItem>
                     </Col>
                     <Col span="6">
-                        <FormItem label="邮政编码">
+                        <FormItem label="邮政编码" prop="yzbm">
                             <Input v-model="formValidate.yzbm" placeholder="邮政编码"></Input>
                         </FormItem>
                     </Col>
                 </Row>
+                <FormItem label="服务点描述">
+                    <Input v-model="formValidate.fwdms" type="textarea" :autosize="{minRows: 5, maxRows: 15}"
+                           placeholder="服务点描述"></Input>
+                </FormItem>
                 <Row>
                     <Col span="12">
-                        <FormItem label="电话号码">
+                        <FormItem label="电话号码" prop="dhhm">
                             <Input v-model="formValidate.dhhm" placeholder="电话号码(总机/查询台)"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="单位电子信箱">
+                        <FormItem label="单位电子信箱" prop="dwdzyx">
                             <Input v-model="formValidate.dwdzyx" placeholder="单位电子信箱(E-mail)"></Input>
                         </FormItem>
                     </Col>
@@ -226,19 +240,36 @@
                 },
                 ruleValidate: {
                     fwwddm: [
-                        {required: true, message: '请填写服务网点代码', trigger: 'blur'}
+                        {required: true, message: '请填写服务网点代码', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+                    ],
+                    dwdzyx: [
+                        {type: 'email', message: '请填写正确格式的邮箱', trigger: 'blur'},
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+                    ],
+                    yzbm: [
+                        {max: 6, message: '长度不能超过6个字符', trigger: 'blur'}
+                    ],
+                    dhhm: [
+                        {max: 12, message: '长度不能超过12个字符', trigger: 'blur'}
+                    ],
+                    fwddemc: [
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     fwdfldm: [
-                        {required: true, message: '请填写服务点分类代码', trigger: 'blur'}
+                        {required: true, message: '请填写服务点分类代码', trigger: 'blur'},
+                        {max: 4, message: '长度不能超过4个字符', trigger: 'blur'}
                     ],
                     kbzjjes: [
-                        {required: true, message: '请填写开办资金金额数', trigger: 'blur'}
+                        {required: true, type: 'number', message: '请填写开办资金金额数', trigger: 'blur', transform:(value) => Number(value)}
                     ],
                     frdb: [
-                        {required: true, message: '请填写法人代表/负责人', trigger: 'blur'}
+                        {required: true, message: '请填写法人代表/负责人', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     xkzhm: [
-                        {required: true, message: '请填写许可证号码', trigger: 'blur'}
+                        {required: true, message: '请填写许可证号码', trigger: 'blur'},
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
                     ],
                     fwdflgllbdm: [
                         {required: true, message: '请选择分类管理类别代码', trigger: 'change'}
@@ -259,34 +290,42 @@
                         {required: true, message: '请选择服务点类型', trigger: 'change'}
                     ],
                     xkxmmc: [
-                        {required: true, message: '请填写许可项目名称', trigger: 'blur'}
+                        {required: true, message: '请填写许可项目名称', trigger: 'blur'},
+                        {max: 40, message: '长度不能超过40个字符', trigger: 'blur'}
                     ],
                     jgdm: [
-                        {required: true, message: '请填写服务点标识', trigger: 'blur'}
+                        {required: true, message: '请填写服务点标识', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     hlwyywz: [
-                        {required: true, message: '请填写互联网医院网址', trigger: 'blur'}
+                        {required: true, message: '请填写互联网医院网址', trigger: 'blur'},
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
                     ],
                     styymc: [
                         {required: true, message: '请填写实体医院名称', trigger: 'blur'}
                     ],
                     zzjgdm: [
-                        {required: true, message: '请填写统一社会信用代码', trigger: 'blur'}
+                        {required: true, message: '请填写统一社会信用代码', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     jjlxdm: [
-                        {required: true, message: '请填写经济类型代码', trigger: 'blur'}
+                        {required: true, message: '请填写经济类型代码', trigger: 'blur'},
+                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
                     ],
                     dz: [
-                        {required: true, message: '请填写地址', trigger: 'blur'}
+                        {required: true, message: '请填写地址', trigger: 'blur'},
+                        {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
                     ],
                     styyzzjgdm: [
                         {required: true, message: '请填写实体医院医疗组织服务点代码', trigger: 'blur'}
                     ],
                     fwdmc: [
-                        {required: true, message: '请填写服务点名称', trigger: 'blur'}
+                        {required: true, message: '请填写服务点名称', trigger: 'blur'},
+                        {max: 70, message: '长度不能超过70个字符', trigger: 'blur'}
                     ],
                     xzqhdm: [
-                        {required: true, message: '请填写行政区划代码', trigger: 'blur'}
+                        {required: true, message: '请填写行政区划代码', trigger: 'blur'},
+                        {max: 6, message: '长度不能超过6个字符', trigger: 'blur'}
                     ],
                     styljgdj: [
                         {required: true, message: '请选择实体医疗服务点等级', trigger: 'change'}
@@ -298,7 +337,8 @@
                         {required: true, type: 'date', message: '请选择许可证有效期', trigger: 'change'}
                     ],
                     dwlsgxdm: [
-                        {required: true, message: '请填写单位隶属关系代码', trigger: 'blur'}
+                        {required: true, message: '请填写单位隶属关系代码', trigger: 'blur'},
+                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
                     ],
                     sjscsj: [
                         {required: true, type: 'date', message: '请选择请数据生成时间', trigger: 'change'}

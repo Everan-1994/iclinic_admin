@@ -18,7 +18,7 @@
                         <FormItem label="卡类型/卡号" prop="kh">
                             <Input v-model="formValidate.kh">
                             <Select v-model="formValidate.klx" slot="prepend" style="width: 100px">
-                                <Option v-for="lx in klx" :key="index" :value="lx.value">{{ lx.name }}</Option>
+                                <Option v-for="(lx, index) in klx" :key="index" :value="lx.value">{{ lx.name }}</Option>
                             </Select>
                             </Input>
                         </FormItem>
@@ -29,7 +29,7 @@
                         <FormItem label="证件类型/证件号" prop="zjhm">
                             <Input v-model="formValidate.zjhm">
                             <Select v-model="formValidate.zjlbdm" slot="prepend" style="width: 100px">
-                                <Option v-for="idc in idcard" :key="index" :value="idc.code">{{ idc.name }}</Option>
+                                <Option v-for="(idc, index) in idcard" :key="index" :value="idc.code">{{ idc.name }}</Option>
                             </Select>
                             </Input>
                         </FormItem>
@@ -42,7 +42,7 @@
                     <Col span="6">
                         <FormItem label="性别" prop="xbdm">
                             <Select v-model="formValidate.xbdm" clearable>
-                                <Option v-for="sex in gender" :key="index" :value="sex.code">{{ sex.name }}</Option>
+                                <Option v-for="(sex, index) in gender" :key="index" :value="sex.code">{{ sex.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -60,7 +60,7 @@
                     <Col span="6">
                         <FormItem label="婚姻状况">
                             <Select v-model="formValidate.hyztdm" clearable>
-                                <Option v-for="m in marriage" :key="index" :value="m.code">{{ m.name }}</Option>
+                                <Option v-for="(m, index) in marriage" :key="index" :value="m.code">{{ m.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -72,7 +72,7 @@
                     <Col span="6">
                         <FormItem label="民族">
                             <Select v-model="formValidate.mzdm" clearable>
-                                <Option v-for="n in nation" :key="index" :value="n.code">{{ n.name }}</Option>
+                                <Option v-for="(n, index) in nation" :key="index" :value="n.code">{{ n.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -81,7 +81,7 @@
                     <Col span="8">
                         <FormItem label="国籍">
                             <Select v-model="formValidate.gjdm" clearable>
-                                <Option v-for="c in country" :key="index" :value="c.code">{{ c.name }}</Option>
+                                <Option v-for="(c, index) in country" :key="index" :value="c.code">{{ c.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -93,7 +93,7 @@
                     <Col span="8">
                         <FormItem label="文化程度">
                             <Select v-model="formValidate.whcddm" clearable>
-                                <Option v-for="e in education" :key="index" :value="e.code">{{ e.name }}</Option>
+                                <Option v-for="(e,index) in education" :key="index" :value="e.code">{{ e.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -119,7 +119,7 @@
                     <Col span="8">
                         <FormItem label="职业类别">
                             <Select v-model="formValidate.zylbdm" clearable>
-                                <Option v-for="c in career" :key="index" :value="c.code">{{ c.name }}</Option>
+                                <Option v-for="(c, index) in career" :key="index" :value="c.code">{{ c.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -172,14 +172,14 @@
                     <Col span="6">
                         <FormItem label="ABO血型">
                             <Select v-model="formValidate.abo" clearable>
-                                <Option v-for="a in abo" :key="index" :value="a.code">{{ a.name }}</Option>
+                                <Option v-for="(a, index) in abo" :key="index" :value="a.code">{{ a.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="6">
                         <FormItem label="RH血型">
                             <Select v-model="formValidate.rh" clearable>
-                                <Option v-for="r in rh" :key="index" :value="r.code">{{ r.name }}</Option>
+                                <Option v-for="(r, index) in rh" :key="index" :value="r.code">{{ r.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -188,7 +188,7 @@
                     <Col span="8">
                         <FormItem label="参保类型">
                             <Select v-model="formValidate.cblbdm" clearable>
-                                <Option v-for="i in insurance" :key="index" :value="i.code">{{ i.name }}</Option>
+                                <Option v-for="(i, index) in insurance" :key="index" :value="i.code">{{ i.name }}</Option>
                             </Select>
                         </FormItem>
                     </Col>

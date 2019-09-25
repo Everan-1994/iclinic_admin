@@ -214,7 +214,7 @@
                         {required: true, message: '请填写诊断类型编码', trigger: 'blur'}
                     ],
                     nls: [
-                        {required: true, message: '请填写年龄（岁）', trigger: 'blur'}
+                        {required: true, type: 'string', message: '请填写年龄（岁）', trigger: 'blur'}
                     ],
                     mzh: [
                         {required: true, message: '请填写门诊号', trigger: 'blur'}

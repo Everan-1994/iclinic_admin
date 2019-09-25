@@ -34,8 +34,11 @@
                     <Col span="8">
                         <FormItem label="机构类型" prop="jglx">
                             <Select v-model="formValidate.jglx" clearable>
-                                <Option value="1">类型1</Option>
-                                <Option value="2">类型2</Option>
+                                <Option value="01">互联网医院诊疗</Option>
+                                <Option value="02">健康管理服务</Option>
+                                <Option value="03">药事服务机构</Option>
+                                <Option value="04">药房</Option>
+                                <Option value="05">其他</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -54,8 +57,9 @@
                     <Col span="6">
                         <FormItem label="分类管理类别代码" prop="jgflgllbdm">
                             <Select v-model="formValidate.jgflgllbdm" clearable>
-                                <Option value="1">类别1</Option>
-                                <Option value="2">类别2</Option>
+                                <Option value="1">非盈利性医疗机构</Option>
+                                <Option value="2">盈利性医疗机构</Option>
+                                <Option value="9">其他</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -91,16 +95,21 @@
                     <Col span="8">
                         <FormItem label="实体医疗机构级别" prop="styljgjb">
                             <Select v-model="formValidate.styljgjb" clearable>
-                                <Option value="1">级别1</Option>
-                                <Option value="2">级别2</Option>
+                                <Option value="0">基层卫生服务站</Option>
+                                <Option value="1">一级医院</Option>
+                                <Option value="2">二级医院</Option>
+                                <Option value="3">三级医院</Option>
+                                <Option value="4">未定级</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="8">
                         <FormItem label="实体医疗机构等级" prop="styljgdj">
                             <Select v-model="formValidate.styljgdj" clearable>
-                                <Option value="1">等级1</Option>
-                                <Option value="2">等级2</Option>
+                                <Option value="0">甲等</Option>
+                                <Option value="1">乙等</Option>
+                                <Option value="2">丙等</Option>
+                                <Option value="3">未定等</Option>
                             </Select>
                         </FormItem>
                     </Col>
@@ -131,13 +140,16 @@
                     <Col span="6">
                         <FormItem label="信息安全等级保护" prop="xxaqdjbh">
                             <Select v-model="formValidate.xxaqdjbh" clearable>
-                                <Option value="1">保护1</Option>
-                                <Option value="2">保护2</Option>
+                                <Option value="1">第一级</Option>
+                                <Option value="2">第二级</Option>
+                                <Option value="3">第三级</Option>
+                                <Option value="4">第四级</Option>
+                                <Option value="99">无</Option>
                             </Select>
                         </FormItem>
                     </Col>
                     <Col span="6">
-                        <FormItem label="证书编号">
+                        <FormItem label="证书编号" prop="xxaqdjbhbh">
                             <Input v-model="formValidate.xxaqdjbhbh" placeholder="信息安全等级保护证书编号"></Input>
                         </FormItem>
                     </Col>
@@ -170,12 +182,12 @@
                         </FormItem>
                     </Col>
                     <Col span="6">
-                        <FormItem label="机构第二名称">
+                        <FormItem label="机构第二名称" prop="jgdemc">
                             <Input v-model="formValidate.jgdemc" placeholder="机构第二名称"></Input>
                         </FormItem>
                     </Col>
                     <Col span="6">
-                        <FormItem label="邮政编码">
+                        <FormItem label="邮政编码" prop="yzbm">
                             <Input v-model="formValidate.yzbm" placeholder="邮政编码"></Input>
                         </FormItem>
                     </Col>
@@ -186,12 +198,12 @@
                 </FormItem>
                 <Row>
                     <Col span="12">
-                        <FormItem label="电话号码">
+                        <FormItem label="电话号码" prop="dhhm">
                             <Input v-model="formValidate.dhhm" placeholder="电话号码(总机/查询台)"></Input>
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="单位电子信箱">
+                        <FormItem label="单位电子信箱" prop="dwdzyx">
                             <Input v-model="formValidate.dwdzyx" placeholder="单位电子信箱(E-mail)"></Input>
                         </FormItem>
                     </Col>
@@ -247,10 +259,21 @@
                 },
                 ruleValidate: {
                     xkzhm: [
-                        {required: true, message: '请填写许可证号码', trigger: 'blur'}
+                        {required: true, message: '请填写许可证号码', trigger: 'blur'},
+                        {max: 40, message: '长度不能超过40个字符', trigger: 'blur'}
                     ],
                     kbzjjes: [
-                        {required: true, message: '请填写开办资金金额数', trigger: 'blur'}
+                        {required: true, type: 'number', message: '请填写开办资金金额数', trigger: 'blur', transform:(value) => Number(value)},
+                    ],
+                    dwdzyx: [
+                        {type: 'email', message: '请填写正确格式的邮箱', trigger: 'blur'},
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+                    ],
+                    yzbm: [
+                        {max: 6, message: '长度不能超过6个字符', trigger: 'blur'}
+                    ],
+                    dhhm: [
+                        {max: 12, message: '长度不能超过12个字符', trigger: 'blur'}
                     ],
                     jgszdmzzzdfbz: [
                         {required: true, message: '请选择民族自治地方标志', trigger: 'change'}
@@ -258,41 +281,55 @@
                     sffzjg: [
                         {required: true, message: '请选择是否分支机构', trigger: 'change'}
                     ],
+                    jgdemc: [
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+                    ],
                     frdb: [
-                        {required: true, message: '请填写法人代表/负责人', trigger: 'blur'}
+                        {required: true, message: '请填写法人代表/负责人', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     xkxmmc: [
                         {required: true, message: '请填写许可项目名称', trigger: 'blur'}
                     ],
                     jgdm: [
-                        {required: true, message: '请填写机构标识', trigger: 'blur'}
+                        {required: true, message: '请填写机构标识', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     hlwyywz: [
-                        {required: true, message: '请填写互联网医院网址', trigger: 'blur'}
+                        {required: true, message: '请填写互联网医院网址', trigger: 'blur'},
+                        {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
                     ],
                     styymc: [
-                        {required: true, message: '请填写实体医院名称', trigger: 'blur'}
+                        {required: true, message: '请填写实体医院名称', trigger: 'blur'},
+                        {max: 70, message: '长度不能超过70个字符', trigger: 'blur'}
                     ],
                     zzjgdm: [
-                        {required: true, message: '请填写统一社会信用代码', trigger: 'blur'}
+                        {required: true, message: '请填写统一社会信用代码', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     jjlxdm: [
-                        {required: true, message: '请填写经济类型代码', trigger: 'blur'}
+                        {required: true, message: '请填写经济类型代码', trigger: 'blur'},
+                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
                     ],
                     dz: [
-                        {required: true, message: '请填写地址', trigger: 'blur'}
+                        {required: true, message: '请填写地址', trigger: 'blur'},
+                        {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
                     ],
                     styyzzjgdm: [
-                        {required: true, message: '请填写实体医院医疗组织机构代码', trigger: 'blur'}
+                        {required: true, message: '请填写实体医院医疗组织机构代码', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     jgmc: [
-                        {required: true, message: '请填写机构名称', trigger: 'blur'}
+                        {required: true, message: '请填写机构名称', trigger: 'blur'},
+                        {max: 70, message: '长度不能超过70个字符', trigger: 'blur'}
                     ],
                     xzqhdm: [
-                        {required: true, message: '请填写行政区划代码', trigger: 'blur'}
+                        {required: true, message: '请填写行政区划代码', trigger: 'blur'},
+                        {max: 6, message: '长度不能超过6个字符', trigger: 'blur'}
                     ],
                     jgfldm: [
-                        {required: true, message: '请填写机构分类代码', trigger: 'blur'}
+                        {required: true, message: '请填写机构分类代码', trigger: 'blur'},
+                        {max: 4, message: '长度不能超过4个字符', trigger: 'blur'}
                     ],
                     jglx: [
                         {required: true, message: '请选择级别类型', trigger: 'change'}
@@ -302,6 +339,9 @@
                     ],
                     xxaqdjbh: [
                         {required: true, message: '请选择信息安全等级保护', trigger: 'change'}
+                    ],
+                    xxaqdjbhbh: [
+                        {max: 18, message: '长度不能超过18个字符', trigger: 'blur'}
                     ],
                     styljgdj: [
                         {required: true, message: '请选择实体医疗机构等级', trigger: 'change'}
@@ -313,7 +353,8 @@
                         {required: true, type: 'date', message: '请选择许可证有效期', trigger: 'change'}
                     ],
                     dwlsgxdm: [
-                        {required: true, message: '请填写单位隶属关系代码', trigger: 'blur'}
+                        {required: true, message: '请填写单位隶属关系代码', trigger: 'blur'},
+                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
                     ],
                     jgflgllbdm: [
                         {required: true, message: '请选择分类管理类别代码', trigger: 'change'}

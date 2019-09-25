@@ -167,7 +167,8 @@
                                         size: 'small'
                                     },
                                     style: {
-                                        marginRight: '5px'
+                                        marginRight: '5px',
+                                        display: 'none'
                                     },
                                     on: {
                                         click: () => {

@@ -42,7 +42,7 @@
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="生产厂家">
+                        <FormItem label="生产厂家" prop="sccj">
                             <Input v-model="formValidate.sccj" placeholder="生产厂家"></Input>
                         </FormItem>
                     </Col>
@@ -58,7 +58,7 @@
                         </FormItem>
                     </Col>
                     <Col span="12">
-                        <FormItem label="设备型号">
+                        <FormItem label="设备型号" prop="sbxh">
                             <Input v-model="formValidate.sbxh" placeholder="设备型号"></Input>
                         </FormItem>
                     </Col>
@@ -105,7 +105,7 @@
                         </FormItem>
                     </Col>
                 </Row>
-                <FormItem label="备注">
+                <FormItem label="备注" prop="bz">
                     <Input v-model="formValidate.bz" type="textarea" :autosize="{minRows: 5, maxRows: 15}"
                            placeholder="备注"></Input>
                 </FormItem>
@@ -154,10 +154,23 @@
                 },
                 ruleValidate: {
                     jgdm: [
-                        {required: true, message: '请填写机构标识', trigger: 'blur'}
+                        {required: true, message: '请填写机构标识', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     syqk: [
                         {required: true, message: '请选择使用情况', trigger: 'change'}
+                    ],
+                    llsjsm: [
+                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
+                    ],
+                    bz: [
+                        {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
+                    ],
+                    sccj: [
+                        {max: 120, message: '长度不能超过120个字符', trigger: 'blur'}
+                    ],
+                    sbxh: [
+                        {max: 120, message: '长度不能超过120个字符', trigger: 'blur'}
                     ],
                     cd: [
                         {required: true, message: '请选择产地', trigger: 'change'}
@@ -166,13 +179,16 @@
                         {required: true, type: 'date', message: '请选择购买日期', trigger: 'change'}
                     ],
                     sbmc: [
-                        {required: true, message: '请填写设备名称', trigger: 'blur'}
+                        {required: true, message: '请填写设备名称', trigger: 'blur'},
+                        {max: 20, message: '长度不能超过20个字符', trigger: 'blur'}
                     ],
                     tpsbts: [
-                        {required: true, message: '请填写设备台数', trigger: 'blur'}
+                        {required: true, type: "number", message: '请填写设备台数', trigger: 'blur', transform:(value) => Number(value)},
+                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
                     ],
                     sbdh: [
-                        {required: true, message: '请填写设备代号', trigger: 'blur'}
+                        {required: true, message: '请填写设备代号', trigger: 'blur'},
+                        {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
                     ],
                     sjscsj: [
                         {required: true, type: 'date', message: '请选择请数据生成时间', trigger: 'change'}
