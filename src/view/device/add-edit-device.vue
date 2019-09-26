@@ -145,6 +145,13 @@
     export default {
         name: 'add_edit_device',
         data() {
+            const checkLen = (rule, value, callback) => {
+                if (value > 999) {
+                    callback(new Error('长度不能超过3个字符'))
+                } else {
+                    callback()
+                }
+            }
             return {
                 formValidate: {
                     jgdm: '', sbdh: '', sbmc: '', tpsbts: '', cd: '', sccj: '',
@@ -184,7 +191,7 @@
                     ],
                     tpsbts: [
                         {required: true, type: "number", message: '请填写设备台数', trigger: 'blur', transform:(value) => Number(value)},
-                        {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
+                        {validator: checkLen, trigger: 'blur'}
                     ],
                     sbdh: [
                         {required: true, message: '请填写设备代号', trigger: 'blur'},

@@ -19,7 +19,7 @@
                     <span style="">
                         <Input v-model="keyword" placeholder="请输入关键字" class="mleft" style="width: 200px"/>
                         <DatePicker type="datetimerange" placement="bottom-end" v-model="fdate"
-                                    placeholder="选择添加科室的时间范围"
+                                    placeholder="选择添加转诊记录的时间范围"
                                     style="width: 280px" class="mleft"></DatePicker>
                         <Button type="info" icon="ios-search" class="mleft" @click="query">查询</Button>
                         <Button type="default" icon="md-refresh" class="mleft" @click="resetQuery">重置查询</Button>

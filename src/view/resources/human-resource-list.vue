@@ -135,12 +135,12 @@
                         }
                     },
                     {
-                        title: '性别',
-                        key: 'xb',
+                        title: '出生日期',
+                        key: 'csrq',
                         align: 'center',
                         render: (h, params) => {
                             return h('span', [
-                                params.row.xb
+                                params.row.csrq
                             ])
                         }
                     },
