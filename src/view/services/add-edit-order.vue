@@ -38,7 +38,16 @@
           </Col>
           <Col span="6">
             <FormItem label="卡类型" prop="klx">
-              <Input v-model="formValidate.klx" placeholder="卡类型"></Input>
+              <Select v-model="formValidate.klx" clearable>
+                <Option value="0">健康卡</Option>
+                <Option value="1">社保卡</Option>
+                <Option value="2">市民卡</Option>
+                <Option value="3">医院系统内部号</Option>
+                <Option value="4">计划免疫卡</Option>
+                <Option value="5">国家居民健康卡</Option>
+                <Option value="6">居民健康档案编号</Option>
+                <Option value="9">其他</Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span="6">
@@ -77,7 +86,9 @@
           </Col>
           <Col span="6">
             <FormItem label="性别" prop="xbdm">
-              <Input v-model="formValidate.xbdm" placeholder="性别"></Input>
+              <Select v-model="formValidate.xbdm" clearable>
+                <Option v-for="(sex, index) in gender" :key="index" :value="sex.code">{{ sex.name }}</Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span="6">
@@ -93,7 +104,7 @@
         </Row>
         <Row>
           <Col span="6">
-            <FormItem label="年龄（月）">
+            <FormItem label="年龄（月）" prop="nly">
               <Input v-model="formValidate.nly" placeholder="年龄（月）"></Input>
             </FormItem>
           </Col>
@@ -103,7 +114,7 @@
             </FormItem>
           </Col>
           <Col span="12">
-            <FormItem label="医嘱说明">
+            <FormItem label="医嘱说明" prop="yzsm">
               <Input v-model="formValidate.yzsm" placeholder="医嘱说明"></Input>
             </FormItem>
           </Col>
@@ -116,38 +127,51 @@
           </Col>
           <Col span="6">
             <FormItem label="医嘱项目类型代码" prop="yzxmlxdm">
-              <Input v-model="formValidate.yzxmlxdm" placeholder="医嘱项目类型代码"></Input>
+              <Select v-model="formValidate.yzxmlxdm" clearable>
+                <Option v-for="(a, index) in advice" :key="index" :value="a.code">{{ a.name }}</Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span="6">
             <FormItem label="药品处方属性" prop="ypcfsx">
-              <Input v-model="formValidate.ypcfsx" placeholder="药品处方属性"></Input>
+              <Select v-model="formValidate.ypcfsx" clearable>
+                <Option value="1">普通处方</Option>
+                <Option value="2">麻醉药品</Option>
+                <Option value="3">第一类精神药品处方</Option>
+                <Option value="4">第二类精神药品处方</Option>
+                <Option value="5">毒性药品处方</Option>
+                <Option value="6">放射性药品处方</Option>
+                <Option value="7">草药处方</Option>
+                <Option value="9">其他非药物处方</Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span="6">
             <FormItem label="中药类别代码">
-              <Input v-model="formValidate.zylbdm" placeholder="中药类别代码"></Input>
+              <Select v-model="formValidate.zylbdm" clearable>
+                <Option v-for="(c, index) in cm_category" :key="index" :value="c.code">{{ c.name }}</Option>
+              </Select>
             </FormItem>
           </Col>
         </Row>
         <Row>
           <Col span="6">
-            <FormItem label="处方明细医保编码" >
+            <FormItem label="处方明细医保编码" prop="cfmxybbm">
               <Input v-model="formValidate.cfmxybbm" placeholder="处方明细医保编码"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="药监药品ID">
+            <FormItem label="药监药品ID" prop="ypid">
               <Input v-model="formValidate.ypid" placeholder="药监药品ID"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="药物名称">
+            <FormItem label="药物名称" prop="ypmc">
               <Input v-model="formValidate.ypmc" placeholder="药物名称"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="药品规格">
+            <FormItem label="药品规格" prop="ypgg">
               <Input v-model="formValidate.ypgg" placeholder="药品规格"></Input>
             </FormItem>
           </Col>
@@ -164,7 +188,9 @@
           </Col>
           <Col span="6">
             <FormItem label="药物剂型代码" >
-              <Input v-model="formValidate.ywjxdm" placeholder="药物剂型代码"></Input>
+              <Select v-model="formValidate.ywjxdm" clearable>
+                <Option v-for="(d, index) in drug_form" :key="index" :value="d.code">{{ d.name }}</Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span="6">
@@ -173,29 +199,31 @@
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="药物使用剂量单位" >
+            <FormItem label="药物使用剂量单位" prop="ywsyjldw">
               <Input v-model="formValidate.ywsyjldw" placeholder="药物使用剂量单位"></Input>
             </FormItem>
           </Col>
         </Row>
         <Row>
           <Col span="6">
-            <FormItem label="药物使用频次代码" >
+            <FormItem label="药物使用频次代码" prop="ywsypcdm">
               <Input v-model="formValidate.ywsypcdm" placeholder="药物使用频次代码"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="药物使用频次名称" >
+            <FormItem label="药物使用频次名称" prop="ywsypcmc">
               <Input v-model="formValidate.ywsypcmc" placeholder="药物使用频次名称"></Input>
             </FormItem>
           </Col>
           <Col span="6">
             <FormItem label="用药途径代码" >
-              <Input v-model="formValidate.yytjdm" placeholder="用药途径代码"></Input>
+              <Select v-model="formValidate.yytjdm" clearable>
+                <Option v-for="(d, index) in drug_usage" :key="index" :value="d.code">{{ d.name }}</Option>
+              </Select>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="用药途径名称" >
+            <FormItem label="用药途径名称" prop="yytjmc">
               <Input v-model="formValidate.yytjmc" placeholder="用药途径名称"></Input>
             </FormItem>
           </Col>
@@ -207,7 +235,7 @@
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="处方药品组号" >
+            <FormItem label="处方药品组号" prop="cfypzh">
               <Input v-model="formValidate.cfypzh" placeholder="处方药品组号"></Input>
             </FormItem>
           </Col>
@@ -223,12 +251,12 @@
         </FormItem>
         <Row>
           <Col span="12">
-            <FormItem label="中药饮片煎煮法" >
+            <FormItem label="中药饮片煎煮法" prop="zyypjzf">
               <Input v-model="formValidate.zyypjzf" placeholder="中药饮片煎煮法"></Input>
             </FormItem>
           </Col>
           <Col span="12">
-            <FormItem label="中药用药方法" >
+            <FormItem label="中药用药方法" prop="zyyyff">
               <Input v-model="formValidate.zyyyff" placeholder="中药用药方法"></Input>
             </FormItem>
           </Col>
@@ -240,7 +268,7 @@
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="发药剂量单位" >
+            <FormItem label="发药剂量单位" prop="fyjldw">
               <Input v-model="formValidate.fyjldw" placeholder="发药剂量单位"></Input>
             </FormItem>
           </Col>
@@ -262,73 +290,73 @@
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="医师签名" prop="cfklysqm">
+            <FormItem label="医师签名" prop="cfklysqm" >
               <Input v-model="formValidate.cfklysqm" placeholder="处方开立医师签名"></Input>
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="药剂师工号">
+            <FormItem label="药剂师工号" prop="cfshyjsgh">
               <Input v-model="formValidate.cfshyjsgh" placeholder="处方审核药剂师工号"></Input>
             </FormItem>
           </Col>
         </Row>
         <Row>
           <Col span="8">
-            <FormItem label="药剂师签名">
+            <FormItem label="药剂师签名" prop="cfshyjsqm">
               <Input v-model="formValidate.cfshyjsqm" placeholder="处方审核药剂师签名"></Input>
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="调配药剂师工号">
+            <FormItem label="调配药剂师工号" prop="cftpyjsgh">
               <Input v-model="formValidate.cftpyjsgh" placeholder="处方调配药剂师工号"></Input>
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="调配药剂师签名">
+            <FormItem label="调配药剂师签名" prop="cftpyjsqm">
               <Input v-model="formValidate.cftpyjsqm" placeholder="处方调配药剂师签名"></Input>
             </FormItem>
           </Col>
         </Row>
         <Row>
           <Col span="6">
-            <FormItem label="核对药剂师工号">
+            <FormItem label="核对药剂师工号" prop="cfhdyjsgh">
               <Input v-model="formValidate.cfhdyjsgh" placeholder="处方核对药剂师工号"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="核对药剂师签名">
+            <FormItem label="核对药剂师签名" prop="cfhdyjsqm">
               <Input v-model="formValidate.cfhdyjsqm" placeholder="处方核对药剂师签名"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="发药药剂师工号">
+            <FormItem label="发药药剂师工号" prop="cffyyjsgh">
               <Input v-model="formValidate.cffyyjsgh" placeholder="处方发药药剂师工号"></Input>
             </FormItem>
           </Col>
           <Col span="6">
-            <FormItem label="发药药剂师签名">
+            <FormItem label="发药药剂师签名" prop="cffyyjsqm">
               <Input v-model="formValidate.cffyyjsqm" placeholder="处方发药药剂师签名"></Input>
             </FormItem>
           </Col>
         </Row>
         <Row>
           <Col span="8">
-            <FormItem label="执行结果">
+            <FormItem label="执行结果" prop="zxjg">
               <Input v-model="formValidate.zxjg" placeholder="执行结果"></Input>
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="取药机构代码">
+            <FormItem label="取药机构代码" prop="qyjgdm">
               <Input v-model="formValidate.qyjgdm" placeholder="取药机构代码"></Input>
             </FormItem>
           </Col>
           <Col span="8">
-            <FormItem label="取药机构名称">
+            <FormItem label="取药机构名称" prop="qyjgmc">
               <Input v-model="formValidate.qyjgmc" placeholder="取药机构名称"></Input>
             </FormItem>
           </Col>
         </Row>
-        <FormItem label="备注">
+        <FormItem label="备注" prop="bz">
           <Input v-model="formValidate.bz" type="textarea" :autosize="{minRows: 5, maxRows: 15}"
                  placeholder="备注"></Input>
         </FormItem>
@@ -372,6 +400,7 @@
 <script type="text/ecmascript-6">
 
   import {addOrder, editOrder, orderDetail} from '@/api/order'
+  import { _select } from '@/api/select'
 
   export default {
     name: 'add_edit_order',
@@ -392,13 +421,110 @@
         },
         ruleValidate: {
           jgdm: [
-            {required: true, message: '请填写机构标识', trigger: 'blur'}
+            {required: true, message: '请填写机构标识', trigger: 'blur'},
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          xm: [
+            {required: true, message: '请填写患者姓名', trigger: 'blur'},
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          qyjgdm: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          bz: [
+            {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
+          ],
+          qyjgmc: [
+            {max: 70, message: '长度不能超过70个字符', trigger: 'blur'}
+          ],
+          zxjg: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          cffyyjsqm: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          cffyyjsgh: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          cfhdyjsqm: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          cfhdyjsgh: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          cftpyjsqm: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          cftpyjsgh: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          cfshyjsqm: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          cfshyjsgh: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          cfklysqm: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          fyjldw: [
+            {max: 10, message: '长度不能超过10个字符', trigger: 'blur'}
+          ],
+          zyypjzf: [
+            {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
+          ],
+          zyyyff: [
+            {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
+          ],
+          zyypjs: [
+            {max: 2, message: '长度不能超过2个字符', trigger: 'blur'}
+          ],
+          cfypzh: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          yytjmc: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          ywsypcmc: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          ywsypcdm: [
+            {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
+          ],
+          ywsyjldw: [
+            {max: 6, message: '长度不能超过6个字符', trigger: 'blur'}
+          ],
+          ypgg: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          ypmc: [
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
+          ],
+          ypid: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          cfmxybbm: [
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
+          ],
+          xbdm: [
+            {required: true, message: '请选择性别', trigger: 'change'}
+          ],
+          nls: [
+            {required: true, type: 'string', message: '请填写年龄（岁）', trigger: 'blur'},
+            {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
+          ],
+          nly: [
+            {max: 10, message: '长度不能超过10个字符', trigger: 'blur'}
+          ],
+          yzsm: [
+            {max: 100, message: '长度不能超过100个字符', trigger: 'blur'}
           ],
           cfklysqm: [
             {required: true, message: '请填写处方开立医师签名', trigger: 'blur'}
           ],
           cfklysgh: [
-            {required: true, message: '请填写处方开立医师工号', trigger: 'blur'}
+            {required: true, message: '请填写处方开立医师工号', trigger: 'blur'},
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
           ],
           zje: [
             {required: true, message: '请填写总金额', trigger: 'blur'}
@@ -410,49 +536,49 @@
             {required: true, message: '请填写处方明细名称', trigger: 'blur'}
           ],
           ypcfsx: [
-            {required: true, message: '请填写药品处方属性', trigger: 'blur'}
+            {required: true, message: '请选择药品处方属性', trigger: 'change'}
           ],
           yzxmlxdm: [
-            {required: true, message: '请填写医嘱项目类型代码', trigger: 'blur'}
+            {required: true, message: '请选择医嘱项目类型代码', trigger: 'change'}
           ],
           pxh: [
-            {required: true, message: '请填写排序号', trigger: 'blur'}
+            {required: true, message: '请填写排序号', trigger: 'blur'},
+            {max: 3, message: '长度不能超过3个字符', trigger: 'blur'}
           ],
           xfklksbm: [
-            {required: true, message: '请填写处方开立科室编码', trigger: 'blur'}
+            {required: true, message: '请填写处方开立科室编码', trigger: 'blur'},
+            {max: 10, message: '长度不能超过10个字符', trigger: 'blur'}
           ],
           cfklksmc: [
-            {required: true, message: '请填写处方开立科室名称', trigger: 'blur'}
+            {required: true, message: '请填写处方开立科室名称', trigger: 'blur'},
+            {max: 50, message: '长度不能超过50个字符', trigger: 'blur'}
           ],
           cfyxts: [
-            {required: true, message: '请填写处方有效天数', trigger: 'blur'}
+            {required: true, message: '请填写处方有效天数', trigger: 'blur'},
+            {max: 2, message: '长度不能超过2个字符', trigger: 'blur'}
           ],
           cfmxid: [
-            {required: true, message: '请填写处方明细ID', trigger: 'blur'}
-          ],
-          xbdm: [
-            {required: true, message: '请填写性别代码', trigger: 'blur'}
+            {required: true, message: '请填写处方明细ID', trigger: 'blur'},
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
           ],
           cfbh: [
-            {required: true, message: '请填写处方编号', trigger: 'blur'}
-          ],
-          nls: [
-            {required: true, message: '请填写年龄（岁）', trigger: 'blur'}
-          ],
-          xm: [
-            {required: true, message: '请填写患者姓名', trigger: 'blur'}
+            {required: true, message: '请填写处方编号', trigger: 'blur'},
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
           ],
           mzh: [
-            {required: true, message: '请填写门诊号', trigger: 'blur'}
+            {required: true, message: '请填写门诊号', trigger: 'blur'},
+            {max: 20, message: '长度不能超过20个字符', trigger: 'blur'}
           ],
           klx: [
-            {required: true, message: '请填写卡类型', trigger: 'blur'}
+            {required: true, message: '请选择卡类型', trigger: 'change'}
           ],
           kh: [
-            {required: true, message: '请填写卡号', trigger: 'blur'}
+            {required: true, message: '请填写卡号', trigger: 'blur'},
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
           ],
           fwwddm: [
-            {required: true, message: '请填写服务网点代码', trigger: 'blur'}
+            {required: true, message: '请填写服务网点代码', trigger: 'blur'},
+            {max: 30, message: '长度不能超过30个字符', trigger: 'blur'}
           ],
           cfklsj: [
             {required: true, type: 'date', message: '请选择处方开立日期', trigger: 'change'}
@@ -472,14 +598,36 @@
           cxbz: [
             {required: true, message: '请选择撤销标志', trigger: 'change'}
           ],
-        }
+        },
+        gender: [], // 性别代码
+        advice: [], // 医嘱项目类型代码
+        cm_category: [], // 中药使用类别代码
+        drug_form: [], // 药物剂型代码
+        drug_usage: [], // 药物会用途径代码
       }
     },
     created() {
       this.order_title = this.$route.params.id >= 0 ? '编辑门诊处方' : '添加门诊处方'
       this.setOrder()
+      this.getSelectList('gender')
+      this.getSelectList('advice')
+      this.getSelectList('cm_category')
+      this.getSelectList('drug_form')
+      this.getSelectList('drug_usage')
     },
     methods: {
+      getSelectList(name) {
+        let _this = this
+        _select(name).then(function (res) {
+          if (res.data.errorCode === 0) {
+            _this[`${name}`] = res.data.data
+          } else {
+            console.log('获取下拉菜单：' + name + '失败！')
+          }
+        }).catch(function(err) {
+          console.log('获取下拉菜单：' + name + '失败！')
+        })
+      },
       setOrder() {
         let id = this.$route.params.id
         var that = this
