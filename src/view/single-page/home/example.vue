@@ -2,7 +2,7 @@
     <div ref="dom">
         <Alert show-icon>
             温馨提示
-            <template slot="desc">开发中。。。</template>
+            <template slot="desc">欢迎使用-医疗信息管理系统</template>
         </Alert>
     </div>
 </template>
