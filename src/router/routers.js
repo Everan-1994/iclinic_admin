@@ -586,6 +586,88 @@ export default [
         ]
     },
     {
+        path: '/select',
+        name: 'select',
+        meta: {
+            icon: 'ios-cube',
+            title: '选项管理',
+            notCache: true,
+            access: getAccess(['*',
+                'Get:/admin/select',
+                'Put:/admin/select/{id:[0-9]+}',
+                'Post:/admin/select',
+                'Delete:/admin/select'
+            ]),
+        },
+        component: Main,
+        children: [
+            {
+                path: 'treatment-list',
+                name: 'treatment',
+                meta: {
+                    access: getAccess(['*',
+                        'Get:/admin/select',
+                        'Put:/admin/select/{id:[0-9]+}',
+                        'Post:/admin/select',
+                        'Delete:/admin/select'
+                    ]),
+                    icon: 'ios-cube',
+                    title: '就诊类型',
+                    notCache: true,
+                },
+                component: () => import('@/view/select/select-list.vue'),
+            },
+            {
+                path: 'diagnose-list',
+                name: 'diagnose',
+                meta: {
+                    access: getAccess(['*',
+                        'Get:/admin/select',
+                        'Put:/admin/select/{id:[0-9]+}',
+                        'Post:/admin/select',
+                        'Delete:/admin/select'
+                    ]),
+                    icon: 'ios-cube',
+                    title: '诊断类型',
+                    notCache: true,
+                },
+                component: () => import('@/view/select/select-list.vue'),
+            },
+            {
+                path: 'idcard-list',
+                name: 'idcard',
+                meta: {
+                    access: getAccess(['*',
+                        'Get:/admin/select',
+                        'Put:/admin/select/{id:[0-9]+}',
+                        'Post:/admin/select',
+                        'Delete:/admin/select'
+                    ]),
+                    icon: 'ios-cube',
+                    title: '身份证类型',
+                    notCache: true,
+                },
+                component: () => import('@/view/select/select-list.vue'),
+            },
+            {
+                path: 'insurance-list',
+                name: 'insurance',
+                meta: {
+                    access: getAccess(['*',
+                        'Get:/admin/select',
+                        'Put:/admin/select/{id:[0-9]+}',
+                        'Post:/admin/select',
+                        'Delete:/admin/select'
+                    ]),
+                    icon: 'ios-cube',
+                    title: '参保类型',
+                    notCache: true,
+                },
+                component: () => import('@/view/select/select-list.vue'),
+            },
+        ]
+    },
+    {
         path: '/operation',
         name: 'operation',
         meta: {
